@@ -1,0 +1,449 @@
+{
+	"info": {
+		"_postman_id": "3073c6da-25ee-4e08-8481-05be44cd291c",
+		"name": "REST API Automation Project",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "38503639"
+	},
+	"item": [
+		{
+			"name": "Request 1 (Single User)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// 1. Validate HTTP Status Code\r",
+							"pm.test(\"Status code is 200 OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"// 2. Validate Response Time (Performance Testing)\r",
+							"pm.test(\"Response time is within acceptable limits (below 1000ms)\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+							"});\r",
+							"\r",
+							"// 3. Validate Data Integrity (Checking specific fields)\r",
+							"pm.test(\"Verify User ID and identity accuracy\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.id).to.eql(1);\r",
+							"    pm.expect(jsonData.name).to.be.a('string').and.eql(\"Leanne Graham\");\r",
+							"});\r",
+							"\r",
+							"// 4. Validate Response Schema (Checking object structure)\r",
+							"pm.test(\"Verify response contains expected user object keys\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.all.keys('id', 'name', 'username', 'email', 'address', 'phone', 'website', 'company');\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"followRedirects": false
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://jsonplaceholder.typicode.com/users/1",
+					"protocol": "https",
+					"host": [
+						"jsonplaceholder",
+						"typicode",
+						"com"
+					],
+					"path": [
+						"users",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Request 2 (All Users)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Verify that the response is a list (array) of users\r",
+							"pm.test(\"Status code is 200 OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response is an array of users\", function () {\r",
+							"    pm.expect(pm.response.json()).to.be.an('array');\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/users",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Invalid User (Negative Test)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Check that the server correctly returns 404 for non-existing users\r",
+							"pm.test(\"Status code is 404 Not Found\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/users/999",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"users",
+						"999"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// 1. Validate Resource Creation (Status 201)\r",
+							"pm.test(\"Status code is 201 Created\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"// 2. Validate Performance (Response Time)\r",
+							"pm.test(\"Creation request is fast (below 1200ms)\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1200);\r",
+							"});\r",
+							"\r",
+							"// 3. Verify Data Integrity in Response\r",
+							"pm.test(\"Response body matches the sent user data\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.name).to.eql(\"Salma QA Engineer\");\r",
+							"    pm.expect(jsonData.username).to.eql(\"salma_tester\");\r",
+							"});\r",
+							"\r",
+							"// 4. Verify Server-Side ID Generation\r",
+							"pm.test(\"Server generated a unique ID for the new user\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property('id');\r",
+							"    pm.expect(jsonData.id).to.be.a('number');\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Salma QA Engineer\",\r\n    \"username\": \"salma_tester\",\r\n    \"email\": \"salma@testing-pro.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://jsonplaceholder.typicode.com/users",
+					"protocol": "https",
+					"host": [
+						"jsonplaceholder",
+						"typicode",
+						"com"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// 1. Validate Success Status Code\r",
+							"pm.test(\"Status code is 200 OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"// 2. Validate Performance (Response Time)\r",
+							"pm.test(\"Update process is fast (below 1000ms)\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+							"});\r",
+							"\r",
+							"// 3. Verify Data Update Accuracy\r",
+							"pm.test(\"Response reflects the updated name and email\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.name).to.eql(\"Salma QA - Updated\");\r",
+							"    pm.expect(jsonData.email).to.eql(\"salma_new@testing.com\");\r",
+							"});\r",
+							"\r",
+							"// 4. Verify ID consistency\r",
+							"pm.test(\"User ID remains consistent after update\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.id).to.eql(1);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 1,\r\n    \"name\": \"Salma QA - Updated\",\r\n    \"username\": \"salma_pro\",\r\n    \"email\": \"salma_new@testing.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://jsonplaceholder.typicode.com/users/1",
+					"protocol": "https",
+					"host": [
+						"jsonplaceholder",
+						"typicode",
+						"com"
+					],
+					"path": [
+						"users",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// 1. Validate Deletion Success Status\r",
+							"// Note: JSONPlaceholder returns 200, but some APIs return 204 (No Content)\r",
+							"pm.test(\"Status code is 200 OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"// 2. Validate Performance (Response Time)\r",
+							"pm.test(\"Deletion request processed quickly\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+							"});\r",
+							"\r",
+							"// 3. Verify Empty Object or Confirmation\r",
+							"pm.test(\"Verify that the response body is empty (Resource Deleted)\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.be.empty;\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://jsonplaceholder.typicode.com/users/1",
+					"protocol": "https",
+					"host": [
+						"jsonplaceholder",
+						"typicode",
+						"com"
+					],
+					"path": [
+						"users",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// 1. Validate Partial Update Success\r",
+							"pm.test(\"Status code is 200 OK - Patch Successful\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"// 2. Verify only the specific field was updated\r",
+							"pm.test(\"Response reflects the patched email\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.email).to.eql(\"salma_patch@test.com\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"email\": \"salma_patch@test.com\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/users/1",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"users",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// 1. Validate Request Success\r",
+							"pm.test(\"Status code is 200 OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"// 2. Verify Body is Empty (HEAD requests must not return a body)\r",
+							"pm.test(\"Response body is empty as expected for HEAD method\", function () {\r",
+							"    pm.expect(pm.response.text()).to.be.empty;\r",
+							"});\r",
+							"\r",
+							"// 3. Check specific headers\r",
+							"pm.test(\"Content-Type header exists\", function () {\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "HEAD",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/users/1",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"users",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// 1. Validate Request Success\r",
+							"pm.test(\"Status code is 204 No Content or 200 OK\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 204]);\r",
+							"});\r",
+							"\r",
+							"// 2. Check Allowed Methods in Headers\r",
+							"pm.test(\"Verify 'Allow' header contains permitted methods\", function () {\r",
+							"    pm.response.to.have.header(\"Allow\");\r",
+							"    var allowedMethods = pm.response.headers.get(\"Allow\");\r",
+							"    console.log(\"Allowed Methods: \" + allowedMethods);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "OPTIONS",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/users",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
