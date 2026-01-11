@@ -29,20 +29,20 @@ This project is a **Professional API Testing Framework** designed to validate CR
 ### 🟢 Overall Run Summary
 The entire collection was executed with **25 Passed Assertions** and **0 Failures**.
 
-![Run Summary](https://ibb.co/VpzQ2RGG)
+![Run Summary](https://1drv.ms/i/c/f047d8e8f96d3a34/IQCBNLC2cBKcS7R9GBuG0kyAAUehzztJuHHYemIBDJrc_Cc?e=Lz4jQF)
 
 ### 🔍 Detailed Request Results
 | Request Name | Method | Key Validations | Screenshot Link |
 | :--- | :--- | :--- | :--- |
-| **Get Single User** | `GET` | ID Accuracy, Object Keys | [View Result](https://ibb.co/5WjWNh1z) |
-| **Get All Users** | `GET` | Status 200, Array Check | [View Result](https://ibb.co/YFCKhK3D) |
-| **Get Invalid User** | `GET` | Negative Test (404) | [View Result](https://ibb.co/YFCKhK3D) |
-| **Create New User** | `POST` | Status 201, Unique ID | [View Result](https://ibb.co/Nq8L6dd) |
-| **Update User (Full)** | `PUT` | Status 200, Data Sync | [View Result](https://ibb.co/RTXbcz01) |
-| **Update User (Partial)** | `PATCH` | Email Patch Success | [View Result](https://ibb.co/wFzFYrxH) |
-| **Delete User** | `DELETE` | Empty Body Verification | [View Result](https://ibb.co/pBDwnhML) |
-| **Check User Headers** | `HEAD` | Metadata Validation | [View Result](https://ibb.co/21xFQ58z) |
-| **Check API Permissions** | `OPTIONS` | Permitted Methods | [View Result](https://ibb.co/mCzrndM4) |
+| **Get Single User** | `GET` | ID Accuracy, Object Keys | [View Result](https://1drv.ms/i/c/f047d8e8f96d3a34/IQCINeqdHxqvSZl2OhzF45jWAUJdh3BS1HrvB0PAKLccdqo?e=sSWRhr) |
+| **Get All Users** | `GET` | Status 200, Array Check | [View Result](https://1drv.ms/i/c/f047d8e8f96d3a34/IQAjePCLKIBVSYCzmaGsKgx1AZzXEH2sDE2HuzHPdYW38AM?e=bKnCmU) |
+| **Get Invalid User** | `GET` | Negative Test (404) | [View Result](https://1drv.ms/i/c/f047d8e8f96d3a34/IQAjePCLKIBVSYCzmaGsKgx1AZzXEH2sDE2HuzHPdYW38AM?e=bKnCmU) |
+| **Create New User** | `POST` | Status 201, Unique ID | [View Result](https://1drv.ms/i/c/f047d8e8f96d3a34/IQCoLFC0rgP9RZYaXNYkO8JrARCAKnDZpAM5AM-MIt6OrH4?e=Zzyxla) |
+| **Update User (Full)** | `PUT` | Status 200, Data Sync | [View Result](https://1drv.ms/i/c/f047d8e8f96d3a34/IQDwvfIqD0thSIAXBXc3-ZjmAZ_xgUX7Nm0lOYR7f2TiPFk?e=CoQ0c6) |
+| **Update User (Partial)** | `PATCH` | Email Patch Success | [View Result](https://1drv.ms/i/c/f047d8e8f96d3a34/IQCXA7q4zrykRLQAjUYmHmGvAaaYWTJquv4pH9PA_H5_hK8?e=a4aVyl) |
+| **Delete User** | `DELETE` | Empty Body Verification | [View Result](https://1drv.ms/i/c/f047d8e8f96d3a34/IQBnQQKv7Vi_TaYX3QElT425AXbDMLMjxxAjhobqol05qwo?e=Yeil3U) |
+| **Check User Headers** | `HEAD` | Metadata Validation | [View Result](https://1drv.ms/i/c/f047d8e8f96d3a34/IQAKm8dCIW7mSYnwflTQTmn0AZe8R3_5Gq2OA1Ka7Srxdn8?e=2tgYgo) |
+| **Check API Permissions** | `OPTIONS` | Permitted Methods | [View Result](https://1drv.ms/i/c/f047d8e8f96d3a34/IQAoVDApqZbFR4mVjNdopvrPAbBwwT8JpK_w1kqThtkuy0U?e=9IJHWN) |
 
 ---
 
